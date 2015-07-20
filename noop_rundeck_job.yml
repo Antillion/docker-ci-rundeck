@@ -1,0 +1,15 @@
+- id: 6777d2cc-ecca-4a8b-8df9-53d304a24ecc
+  project: demoproject
+  loglevel: INFO
+  multipleExecutions: true
+  sequence:
+    keepgoing: false
+    strategy: node-first
+    commands:
+    - exec: echo "Script called" && echo $@
+  description: ''
+  name: demo-project
+  uuid: 6777d2cc-ecca-4a8b-8df9-53d304a24ecc
+  options:
+    param1:
+      description: some parameter 1

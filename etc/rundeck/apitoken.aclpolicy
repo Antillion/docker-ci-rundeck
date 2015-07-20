@@ -1,0 +1,29 @@
+description: API all access
+context:
+  project: '.*' # all projects
+for:
+  resource:
+    - allow: '*'
+  adhoc:
+    - allow: '*' # allow read/running/killing adhoc jobs
+  job:
+    - allow:  '*'
+  node:
+    - allow: '*' # allow read/run for all nodes
+by:
+  group: api_token_group
+
+---
+
+description: Admin, all access.
+context:
+  application: 'rundeck'
+for:
+  resource:
+    - allow: '*' # allow create of projects
+  project:
+    - allow: '*' # allow view/admin of all projects
+  storage:
+    - allow: '*' # allow read/create/update/delete for all /keys/* storage content
+by:
+  group: api_token_group

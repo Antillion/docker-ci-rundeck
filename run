@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+
+echo "Starting Supervisor.  You can safely CTRL-C and the container will continue to run with or without the -d (daemon) option"
+/usr/bin/supervisord >> /dev/null &
+tail -f /var/log/rundeck/*
