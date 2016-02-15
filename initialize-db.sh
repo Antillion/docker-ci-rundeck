@@ -88,8 +88,19 @@ echo "`date +"%d.%m.%Y %T.%3N"` - Starting ${prog} to initialize the database"
 PID=$!
 echo "`date +"%d.%m.%Y %T.%3N"` - Waiting ${INIT_WAITTIME_IN_S} for ${prog} to finish starting up"
 sleep $INIT_WAITTIME_IN_S
+
+# mysql -e "SELECT * from rundeckdb.rduser"
+
+(
+  echo "INSERT INTO rundeckdb.rduser (version, email, first_name, last_name, login, date_created, last_updated)"
+  echo "       VALUES (0, 'admin@antillion.mil.uk', 'Admin', 'User', 'admin', '2016-02-15 14:43:58', '2016-02-15 14:43:58');"
+  echo "INSERT INTO rundeckdb.auth_token (version,auth_roles,token,user_id)"
+  echo "       VALUES (0, 'api_token_group', '$RUNDECK_APITOKEN', 1);"
+) | mysql
+
 echo "`date +"%d.%m.%Y %T.%3N"` - Setting up integration project & job"
 /tmp/setup-project.sh || { echo "`date +"%d.%m.%Y %T.%3N"` - Project setup & job import failed" ; exit 1 ; }
+
 
 echo "`date +"%d.%m.%Y %T.%3N"` - Stopping MySQL"
 service mysql stop
