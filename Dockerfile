@@ -27,7 +27,6 @@ RUN apt-get -qq update && apt-get -qqy upgrade && apt-get -qqy install --no-inst
     pwgen && \
     apt-get clean
 
-#ADD http://download.rundeck.org/deb/rundeck-$RUNDECK_VERSION.deb /tmp/rundeck.deb
 ADD run /opt/run
 
 # Download and install Rundeck & then set correct permissions
@@ -56,7 +55,6 @@ ADD etc/rundeck/apitoken.aclpolicy /etc/rundeck/apitoken.aclpolicy
 # Make sure some key rundeck directories are owned correctly
 RUN chown -R rundeck /var/log/rundeck && \
     chown -R rundeck /var/lib/rundeck && \
-    # sed -ri "s/RUNDECK_APITOKEN/$RUNDECK_APITOKEN/" /etc/rundeck/tokens.properties && \
     sed -ri "s/ADMIN_PASSWORD/$ADMIN_PASSWORD/" /etc/rundeck/framework.properties && \
     sed -ri "s,SERVER_URL,$SERVER_URL," /etc/rundeck/framework.properties && \
     sed -ri "s/SERVER_HOSTNAME/$SERVER_HOSTNAME/" /etc/rundeck/framework.properties && \
