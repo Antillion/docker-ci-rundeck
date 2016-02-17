@@ -36,7 +36,9 @@ RUN curl http://download.rundeck.org/deb/rundeck-$RUNDECK_VERSION.deb -o /tmp/ru
     chown rundeck:rundeck /tmp/rundeck && \
     chmod u+x /opt/run && \
     mkdir -p /var/lib/rundeck/.ssh && \
-    chown rundeck:rundeck /var/lib/rundeck/.ssh
+    chown -R rundeck:rundeck /var/lib/rundeck/ && \
+    chown -R rundeck:rundeck /var/log/rundeck && \
+    chown -R rundeck:rundeck /var/rundeck
 
 # Supervisor setup for Rundeck & build-in MySQL
 ADD rundeck.conf /etc/supervisor/conf.d/rundeck.conf
