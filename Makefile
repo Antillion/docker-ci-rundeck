@@ -5,12 +5,12 @@ VERSION ?= 2.7.1-1-GA
 REPO = rundeck
 NAME = rundeck
 INSTANCE = default
-SUDO_CMD = sudo
+SUDO_CMD ?= sudo
 
 .PHONY: build push shell run start stop rm release
 
 build:
-	$(SUDO_CMD) docker build -t $(NS)/$(REPO):$(VERSION) .
+	$(SUDO_CMD) RUNDECK_VERSION="$(VERSION)" docker build -t $(NS)/$(REPO):$(VERSION) .
 
 push:
 	$(SUDO_CMD) docker push $(NS)/$(REPO):$(VERSION)
