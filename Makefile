@@ -2,8 +2,8 @@ include env_make
 NS = docker-registry.poven.antillion.mil.uk:5000
 VERSION ?= 2.7.1-1-GA
 
-REPO = rundeck
-NAME = rundeck
+REPO = ci-rundeck
+NAME = ci-rundeck
 INSTANCE = default
 SUDO_CMD ?= sudo
 
@@ -12,12 +12,12 @@ SUDO_CMD ?= sudo
 build:
 	$(SUDO_CMD) RUNDECK_VERSION="$(VERSION)" docker build -t $(NS)/$(REPO):$(VERSION) .
 
-push:
-	$(SUDO_CMD) docker push $(NS)/$(REPO):$(VERSION)
+# push:
+# 	$(SUDO_CMD) docker push $(NS)/$(REPO):$(VERSION)
 
-push_docker:
-	$(SUDO_CMD) docker tag -f $(NS)/$(REPO):$(VERSION) antillion/salt-master-docker:$(VERSION)
-	$(SUDO_CMD) docker push antillion/salt-master-docker:$(VERSION)
+push_to_pip:
+	# $(SUDO_CMD) docker tag $(NS)/$(REPO):$(VERSION) $/salt-master-docker:$(VERSION)
+	$(SUDO_CMD) docker push $(NS)/$(REPO):$(VERSION)
 
 shell:
 	$(SUDO_CMD) docker run --rm --name $(NAME)-$(INSTANCE) -i -t $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO):$(VERSION) /bin/bash
