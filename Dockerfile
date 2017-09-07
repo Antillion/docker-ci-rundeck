@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     SERVER_HOSTNAME=localhost \
     SERVER_URL=http://localhost:4440 \
     RUNDECK_APITOKEN=pFLdEn0FVkIIdTHvpbu19Wq3XttqfAj3 \
-    RUNDECK_VERSION=2.6.2-1-GA \
+    RUNDECK_VERSION=2.7.1-1-GA \
     JOB_LOCATION=/tmp/noop_rundeck_job.yml \
     RUNDECK_PROJECTNAME=ci-project \
     ADMIN_PASSWORD=0*820p6{I7
@@ -68,7 +68,7 @@ RUN /tmp/initialize-db.sh
 
 # Finally, we add our pre-defined node list (just localhost)
 ADD var.rundeck.project.nodes.xml /var/rundeck/projects/$RUNDECK_PROJECTNAME/etc/resources.xml
-
+VOLUME /var/lib/mysql
 EXPOSE 4440 4443
 
 # Start Supervisor

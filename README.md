@@ -19,3 +19,7 @@ Ones you might want to change:
  - `RUNDECK_PASSWORD`: Rundeck DB user password, default: auto-generated password
  - `DEBIAN_SYS_MAINT_PASSWORD`: Password for the 'debian system maintenance' user, default: auto-generated password
  - `DEBIAN_FRONTEND`: For APT, probably not needed, don't change, default: noninteractive
+
+# Volumes
+
+ - `/var/lib/mysql` : Rundeck database storage
